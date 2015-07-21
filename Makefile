@@ -19,4 +19,15 @@ ibd/ibd-writeup.xhtml : ibd/ibd-writeup.tex
 %.png : %.pdf
 	convert -density 300 $< -flatten $@
 
+notes: popgen_notes.pdf
+
+html-notes: popgen_notes.html
+
 popgen_notes.pdf: popgen_notes.tex 
+	pdflatex $^
+
+popgen_notes.html: popgen_notes.tex
+	pandoc -s --mathjax --to html5 $< > $@
+
+
+.PHONY: notes html-notes
